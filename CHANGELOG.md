@@ -2,7 +2,9 @@
 
 Toutes les notes importantes sont ici. Le projet suit [SemVer](https://semver.org/lang/fr/).
 
-## [Unreleased]
+## [0.1.0] — 2026-04-19
+
+Première release publique — « Première lueur ». MVP V1 complet, pre-alpha.
 
 ### Ajouté
 - V1 MVP complète : bootstrap Vue 3 + Vite + Tailwind + Pinia + router.
