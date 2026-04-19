@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref, watch } from 'vue';
 import type { ActionGroup } from '@/content/questionnaires/types';
 
 interface Props {
@@ -10,11 +11,21 @@ const emit = defineEmits<{
   'update:modelValue': [value: string[]];
 }>();
 
+const local = ref<Set<string>>(new Set(props.modelValue));
+watch(
+  () => props.modelValue,
+  (v) => {
+    local.value = new Set(v);
+  },
+  { deep: true }
+);
+
 function toggle(key: string): void {
-  const set = new Set(props.modelValue);
-  if (set.has(key)) set.delete(key);
-  else set.add(key);
-  emit('update:modelValue', Array.from(set));
+  const next = new Set(local.value);
+  if (next.has(key)) next.delete(key);
+  else next.add(key);
+  local.value = next;
+  emit('update:modelValue', Array.from(next));
 }
 </script>
 

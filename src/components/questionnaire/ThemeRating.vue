@@ -2,6 +2,7 @@
 /**
  * Échelle 0-3 pour 9-11 ans, par section.
  */
+import { ref, watch } from 'vue';
 import type { RatingSection } from '@/content/questionnaires/types';
 
 interface Props {
@@ -15,8 +16,18 @@ const emit = defineEmits<{
   'update:modelValue': [value: Record<string, number>];
 }>();
 
+const local = ref<Record<string, number>>({ ...props.modelValue });
+watch(
+  () => props.modelValue,
+  (v) => {
+    local.value = { ...v };
+  },
+  { deep: true }
+);
+
 function set(key: string, score: number): void {
-  emit('update:modelValue', { ...props.modelValue, [key]: score });
+  local.value = { ...local.value, [key]: score };
+  emit('update:modelValue', local.value);
 }
 </script>
 

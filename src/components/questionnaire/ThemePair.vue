@@ -23,6 +23,9 @@ const emit = defineEmits<{
 type Choice = 'left' | 'right' | 'both' | 'neither' | null;
 
 function currentChoice(): Choice {
+  const hasLeft = props.pair.left.key in props.modelValue;
+  const hasRight = props.pair.right.key in props.modelValue;
+  if (!hasLeft && !hasRight) return null;
   const l = props.modelValue[props.pair.left.key] ?? 0;
   const r = props.modelValue[props.pair.right.key] ?? 0;
   if (l === 2 && r === 2) return 'both';

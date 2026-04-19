@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref, watch } from 'vue';
 import type { ContextQuestion } from '@/content/questionnaires/types';
 
 interface Props {
@@ -10,8 +11,18 @@ const emit = defineEmits<{
   'update:modelValue': [value: Record<string, string>];
 }>();
 
+const local = ref<Record<string, string>>({ ...props.modelValue });
+watch(
+  () => props.modelValue,
+  (v) => {
+    local.value = { ...v };
+  },
+  { deep: true }
+);
+
 function set(qKey: string, optKey: string): void {
-  emit('update:modelValue', { ...props.modelValue, [qKey]: optKey });
+  local.value = { ...local.value, [qKey]: optKey };
+  emit('update:modelValue', local.value);
 }
 </script>
 
