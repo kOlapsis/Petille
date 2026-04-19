@@ -9,9 +9,11 @@ import InstallPrompt from '@/components/ui/InstallPrompt.vue';
   <div class="flex min-h-[100dvh] flex-col">
     <AppHeader />
     <main id="main" class="flex-1">
-      <RouterView v-slot="{ Component }">
+      <RouterView v-slot="{ Component, route }">
         <Transition name="fade" mode="out-in">
-          <component :is="Component" />
+          <div :key="route.fullPath">
+            <component :is="Component" />
+          </div>
         </Transition>
       </RouterView>
     </main>
