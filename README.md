@@ -295,9 +295,9 @@ Ce choix est volontaire : si quelqu'un améliore l'outil pour le proposer en Saa
 
 ## Auteur
 
-**Benjamin** — développeur et architecte freelance à Bordeaux.
+**Benjamin TOUCHARD** — développeur et architecte freelance à Bordeaux.
 
-25 ans dans la tech — développeur, lead, architecte. Stack principale aujourd'hui : Go, Vue 3, PostgreSQL, Docker. Je travaille en freelance sous le nom commercial **Kolapsis** et j'interviens notamment comme CTO à temps partiel chez **NéoDTX**. J'ai aussi 16 ans d'enseignement au CESI et chez Ynov derrière moi.
+25 ans dans la tech — développeur, lead, architecte. Stack principale aujourd'hui : Go, Vue 3, PostgreSQL, Docker. J'interviens notamment comme CTO à temps partiel chez **NéoDTX**. J'ai aussi 16 ans d'enseignement au CESI et chez Ynov derrière moi.
 
 Je défends une approche pragmatique de la tech : souveraineté numérique, self-hosting, code ouvert, zéro bullshit.
 

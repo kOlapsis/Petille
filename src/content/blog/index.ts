@@ -23,7 +23,7 @@ const POSTS: BlogPost[] = [
       "Ce n'est pas une fatalité : à 6 ans, les enfants ne choisissent pas un métier, ils nomment ce qu'ils connaissent. Pourquoi c'est normal, et ce qu'on peut faire.",
     date: '2026-04-01',
     tags: ['orientation', 'développement', '6-11 ans'],
-    author: 'Benjamin',
+    author: 'Benjamin TOUCHARD',
     html: `
 <p>Si vous demandez à une classe de CP ce qu'ils veulent faire plus tard, vous obtenez
 un nuage très concentré : vétérinaire, pompier, maîtresse, footballeur, policier, vendeuse
@@ -69,7 +69,7 @@ Célébrer une réponse (« ah super, tu seras médecin alors ! ») plus qu'une 
       "Études sur le 'draw a scientist test' et données récentes : comment les enfants apprennent qui a le droit de faire quoi. Et comment on peut laisser la fenêtre ouverte plus longtemps.",
     date: '2026-04-08',
     tags: ['stéréotypes', 'genre', 'recherche'],
-    author: 'Benjamin',
+    author: 'Benjamin TOUCHARD',
     html: `
 <p>En 1983, la chercheuse américaine David Wade Chambers publie une étude qui deviendra
 célèbre : le <em>Draw-A-Scientist Test</em>. Il demande à près de 5 000 enfants de dessiner
@@ -126,7 +126,7 @@ chaque année passée avec une fenêtre fermée est une année qu'il faudra rouv
       'Le positionnement radical de Pétille : ne jamais mapper une réponse vers un métier. Pourquoi c\'est un choix philosophique, pas une limitation technique.',
     date: '2026-04-15',
     tags: ['positionnement', 'vision', 'foss'],
-    author: 'Benjamin',
+    author: 'Benjamin TOUCHARD',
     html: `
 <p>Quand on montre la maquette de Pétille à quelqu'un qui connaît le secteur, la première
 réaction est presque toujours la même : « OK, et le résultat ? Ça te sort une liste de

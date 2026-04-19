@@ -4,7 +4,7 @@ import JsonLd from '@/components/seo/JsonLd.vue';
 
 const title = "À propos — Pétille";
 const description =
-  "Pétille est un projet de Benjamin (Kolapsis), développeur à Bordeaux. FOSS, zéro backend, données chez vous.";
+  "Pétille est un projet de Benjamin TOUCHARD, développeur à Bordeaux. FOSS, zéro backend, données chez vous.";
 
 useHead({
   title,
@@ -19,10 +19,9 @@ useHead({
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
-  name: 'Benjamin',
+  name: 'Benjamin TOUCHARD',
   jobTitle: 'Développeur et architecte freelance',
   url: 'https://kolapsis.com',
-  worksFor: { '@type': 'Organization', name: 'Kolapsis' },
   sameAs: ['https://github.com/kolapsis'],
 };
 </script>
@@ -48,12 +47,10 @@ const jsonLd = {
 
     <h2>L'auteur</h2>
     <p>
-      <strong>Benjamin</strong>, développeur et architecte freelance à Bordeaux. 25 ans dans la
-      tech — développeur, lead, architecte. Stack principale : Go, Vue 3, PostgreSQL, Docker. Je
-      travaille en freelance sous le nom commercial
-      <a href="https://kolapsis.com" rel="noopener">Kolapsis</a> et j'interviens notamment comme CTO
-      à temps partiel chez NéoDTX. J'ai aussi 16 ans d'enseignement au CESI et chez Ynov derrière
-      moi.
+      <strong>Benjamin TOUCHARD</strong>, développeur et architecte freelance à Bordeaux. 25 ans
+      dans la tech — développeur, lead, architecte. Stack principale : Go, Vue 3, PostgreSQL,
+      Docker. J'interviens notamment comme CTO à temps partiel chez NéoDTX. J'ai aussi 16 ans
+      d'enseignement au CESI et chez Ynov derrière moi.
     </p>
     <p>
       Je défends une approche pragmatique de la tech : souveraineté numérique, self-hosting, code
@@ -72,7 +69,7 @@ const jsonLd = {
     <h2>Liens</h2>
     <ul>
       <li><a href="https://github.com/kolapsis/petille" rel="noopener">Code source (GitHub)</a></li>
-      <li><a href="https://kolapsis.com" rel="noopener">Site Kolapsis</a></li>
+      <li><a href="https://kolapsis.com" rel="noopener">kolapsis.com</a> — mon site</li>
       <li>
         <a
           href="https://github.com/kolapsis/petille/blob/main/LICENSE"

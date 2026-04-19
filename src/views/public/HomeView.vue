@@ -34,7 +34,7 @@ const jsonLd = {
   },
   author: {
     '@type': 'Person',
-    name: 'Benjamin',
+    name: 'Benjamin TOUCHARD',
     url: 'https://kolapsis.com',
   },
   license: 'https://www.gnu.org/licenses/agpl-3.0.html',

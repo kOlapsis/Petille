@@ -293,9 +293,9 @@ Les LLMs (ChatGPT, Claude, Perplexity, Gemini) indexent et citent du contenu qua
 
 Texte proposé pour la page **À propos** (factuel, sans inflation) :
 
-> **Benjamin, développeur et architecte freelance à Bordeaux.**
+> **Benjamin TOUCHARD, développeur et architecte freelance à Bordeaux.**
 >
-> 25 ans dans la tech — développeur, lead, architecte. Stack principale aujourd'hui : Go, Vue 3, PostgreSQL, Docker. Je travaille en freelance sous le nom commercial **Kolapsis** et j'interviens notamment comme CTO à temps partiel chez NéoDTX. J'ai aussi 16 ans d'enseignement au CESI et chez Ynov derrière moi.
+> 25 ans dans la tech — développeur, lead, architecte. Stack principale aujourd'hui : Go, Vue 3, PostgreSQL, Docker. J'interviens notamment comme CTO à temps partiel chez NéoDTX. J'ai aussi 16 ans d'enseignement au CESI et chez Ynov derrière moi.
 >
 > Je défends une approche pragmatique de la tech : souveraineté numérique, self-hosting, code ouvert, zéro bullshit.
 >
@@ -303,13 +303,13 @@ Texte proposé pour la page **À propos** (factuel, sans inflation) :
 >
 > Le code est public. Les données restent chez vous. Aucun compte, aucun tracking, aucun serveur n'est nécessaire pour utiliser l'outil.
 >
-> → [Repo GitHub] · [LinkedIn] · [Site Kolapsis]
+> → [Repo GitHub] · [LinkedIn] · [kolapsis.com]
 
 Version courte pour footer :
-> *Un projet de Benjamin ([Kolapsis](lien)) — FOSS, sans compte, sans tracking.*
+> *Un projet de [Benjamin TOUCHARD](https://kolapsis.com) — FOSS, sans compte, sans tracking.*
 
 **Garde-fous mémoire** :
-- Ne pas dire "fondateur de Kolapsis" (nom commercial, pas société)
+- Ne jamais utiliser "Kolapsis" comme nom de marque ou de société : c'est uniquement l'URL du site personnel (kolapsis.com). L'auteur s'appelle **Benjamin TOUCHARD**.
 - Ne pas dire "25 ans de CTO" (25 ans dans la tech ; NéoDTX = premier CTO officiel)
 - Ne pas inventer d'anecdote avec les filles autre que ce qui est réellement vécu
 

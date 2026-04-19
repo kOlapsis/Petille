@@ -4,7 +4,7 @@
   "private": true,
   "description": "Carnet d'appétences pour enfants 6-11 ans — PWA FOSS, zéro backend, zéro tracking.",
   "license": "AGPL-3.0-or-later",
-  "author": "Benjamin <contact@kolapsis.com>",
+  "author": "Benjamin TOUCHARD <contact@kolapsis.com>",
   "homepage": "https://github.com/kolapsis/petille",
   "type": "module",
   "engines": {
