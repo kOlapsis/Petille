@@ -37,7 +37,7 @@ pnpm check:bundle # vérifie le budget gzip
 - `src/views/public/` — pages SSG indexées (Home, About, FAQ, Blog).
 - `src/views/app/` — application non-SSG (onboarding, dashboard, questionnaire…).
 - `src/components/` — briques UI réutilisables.
-- `deploy/` — Dockerfile + nginx.conf + docker-compose Traefik.
+- `deploy/` — Dockerfile + Caddyfile + docker-compose Traefik.
 
 ## Workflow
 
