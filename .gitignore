@@ -1,0 +1,15 @@
+node_modules
+dist
+dist-ssg
+.vite-ssg-temp
+coverage
+.playwright
+playwright-report
+test-results
+*.tsbuildinfo
+.DS_Store
+.env*.local
+*.log
+.idea
+.vscode/*
+!.vscode/extensions.json
