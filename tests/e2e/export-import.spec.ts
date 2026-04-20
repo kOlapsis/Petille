@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import { SCHEMA_VERSION } from '../../src/lib/schema';
 import { runThroughQuestionnaire } from './helpers';
 
 test.beforeEach(async ({ context }) => {
@@ -56,7 +57,7 @@ test('export → import — un carnet clair fait un aller-retour sans perte', as
     schema_version: number;
     children: { first_name: string; sessions: unknown[] }[];
   };
-  expect(parsed.schema_version).toBe(1);
+  expect(parsed.schema_version).toBe(SCHEMA_VERSION);
   expect(parsed.children).toHaveLength(1);
   expect(parsed.children[0]!.first_name).toBe('Lou');
   expect(parsed.children[0]!.sessions.length).toBeGreaterThanOrEqual(1);
