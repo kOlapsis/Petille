@@ -48,6 +48,7 @@ export const useSessionStore = defineStore('session', {
         this.session.duration_seconds = Math.round((Date.now() - this.startedAt) / 1000);
       }
       this.session.profile_summary = summarize(this.session.answers);
+      this.session.completed_at = new Date().toISOString();
       const finished = this.session;
       this.reset();
       return finished;

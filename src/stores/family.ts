@@ -7,6 +7,8 @@ import { v4 as uuid } from 'uuid';
 import {
   emptyAnswers,
   emptyProfile,
+  isDraftSession,
+  migrateFamilyInPlace,
   questionnaireVersionFor,
   SCHEMA_VERSION,
   type Child,
@@ -37,12 +39,25 @@ export const useFamilyStore = defineStore('family', {
   getters: {
     children: (s) => s.family?.children ?? [],
     childById: (s) => (id: string) => s.family?.children.find((c) => c.id === id) ?? null,
+    draftOf: (s) => (childId: string) => {
+      const child = s.family?.children.find((c) => c.id === childId);
+      return child?.sessions.find(isDraftSession) ?? null;
+    },
+    completedSessionsOf: (s) => (childId: string) => {
+      const child = s.family?.children.find((c) => c.id === childId);
+      return child?.sessions.filter((x) => !isDraftSession(x)) ?? [];
+    },
   },
 
   actions: {
     async hydrate(): Promise<void> {
       if (this.hydrated) return;
-      this.family = await loadFamily();
+      const loaded = await loadFamily();
+      if (loaded) {
+        const needsMigration = (loaded.schema_version as number) < SCHEMA_VERSION;
+        this.family = migrateFamilyInPlace(loaded);
+        if (needsMigration) this.scheduleSave();
+      }
       this.hydrated = true;
     },
 
@@ -89,15 +104,18 @@ export const useFamilyStore = defineStore('family', {
     },
 
     /**
-     * Démarre une nouvelle session vide pour un enfant — l'objet est rendu
-     * pour que `SessionView` y écrive ses réponses au fil du parcours.
+     * Démarre une session pour un enfant — ou reprend le brouillon existant s'il y en a un.
+     * L'objet est rendu pour que `SessionView` y écrive ses réponses au fil du parcours.
      */
     startSession(childId: string, ageAtSession: number): Session {
       const child = this.childById(childId);
       if (!child) throw new Error(`Enfant introuvable : ${childId}`);
+      const draft = child.sessions.find(isDraftSession);
+      if (draft) return draft;
       const session: Session = {
         id: uuid(),
         date: nowIso(),
+        completed_at: null,
         age_at_session: ageAtSession,
         questionnaire_version: questionnaireVersionFor(ageAtSession),
         duration_seconds: 0,
@@ -107,6 +125,22 @@ export const useFamilyStore = defineStore('family', {
       child.sessions.push(session);
       this.touch();
       return session;
+    },
+
+    /** Marque la session comme terminée et la fixe en base. */
+    completeSession(childId: string, sessionId: string): void {
+      const child = this.childById(childId);
+      const session = child?.sessions.find((s) => s.id === sessionId);
+      if (!session) return;
+      session.completed_at = nowIso();
+      this.touch();
+    },
+
+    deleteSession(childId: string, sessionId: string): void {
+      const child = this.childById(childId);
+      if (!child) return;
+      child.sessions = child.sessions.filter((s) => s.id !== sessionId);
+      this.touch();
     },
 
     touch(): void {

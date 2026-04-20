@@ -2,10 +2,12 @@
 import { computed, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { useFamilyStore } from '@/stores/family';
+import { useSessionStore } from '@/stores/session';
 import { ageFromBirthYear } from '@/lib/schema';
 
 const router = useRouter();
 const family = useFamilyStore();
+const sessionStore = useSessionStore();
 
 onMounted(async () => {
   await family.hydrate();
@@ -20,6 +22,21 @@ function startSession(childId: string): void {
 
 function compare(childId: string): void {
   void router.push(`/app/enfant/${childId}/comparer`);
+}
+
+function discardDraft(childId: string): void {
+  const draft = family.draftOf(childId);
+  if (!draft) return;
+  if (!window.confirm('Supprimer le passage en cours ? Les réponses déjà saisies seront perdues.')) {
+    return;
+  }
+  if (sessionStore.session?.id === draft.id) sessionStore.reset();
+  family.deleteSession(childId, draft.id);
+}
+
+function removeSession(childId: string, sessionId: string, label: string): void {
+  if (!window.confirm(`Supprimer le passage du ${label} ? Cette action est définitive.`)) return;
+  family.deleteSession(childId, sessionId);
 }
 
 function formatDate(iso: string): string {
@@ -54,26 +71,69 @@ function formatDate(iso: string): string {
               >· {{ ageFromBirthYear(child.birth_year) }} ans</span
             >
           </h2>
-          <p class="text-sm text-ink-700">{{ child.sessions.length }} passage(s)</p>
+          <p class="text-sm text-ink-700">
+            {{ family.completedSessionsOf(child.id).length }} passage(s)
+          </p>
         </div>
 
-        <ul v-if="child.sessions.length" class="mt-4 space-y-1 text-sm">
-          <li v-for="s in child.sessions" :key="s.id" class="flex justify-between">
+        <div
+          v-if="family.draftOf(child.id)"
+          class="mt-4 rounded-petal border border-brand-200 bg-cream-100 p-3"
+        >
+          <p class="text-sm">
+            <span class="font-medium">Passage en cours</span>
+            — commencé le {{ formatDate(family.draftOf(child.id)!.date) }}.
+          </p>
+          <div class="mt-2 flex flex-wrap gap-2">
+            <button class="btn-primary" @click="startSession(child.id)">Reprendre</button>
+            <button class="btn-ghost text-red-700" @click="discardDraft(child.id)">
+              Supprimer le brouillon
+            </button>
+          </div>
+        </div>
+
+        <ul
+          v-if="family.completedSessionsOf(child.id).length"
+          class="mt-4 space-y-1 text-sm"
+        >
+          <li
+            v-for="s in family.completedSessionsOf(child.id)"
+            :key="s.id"
+            class="flex items-center justify-between gap-3"
+          >
             <RouterLink
               class="underline hover:text-brand-700"
               :to="`/app/enfant/${child.id}/session/${s.id}/synthese`"
             >
               {{ formatDate(s.date) }} · {{ s.questionnaire_version }}
             </RouterLink>
-            <span class="text-ink-700">{{ s.age_at_session }} ans</span>
+            <div class="flex items-center gap-3">
+              <span class="text-ink-700">{{ s.age_at_session }} ans</span>
+              <button
+                type="button"
+                class="text-ink-700 hover:text-red-700"
+                :aria-label="`Supprimer le passage du ${formatDate(s.date)}`"
+                @click="removeSession(child.id, s.id, formatDate(s.date))"
+              >
+                ×
+              </button>
+            </div>
           </li>
         </ul>
 
         <div class="mt-4 flex flex-wrap gap-2">
-          <button class="btn-primary" @click="startSession(child.id)">
+          <button
+            v-if="!family.draftOf(child.id)"
+            class="btn-primary"
+            @click="startSession(child.id)"
+          >
             Commencer un nouveau passage
           </button>
-          <button v-if="child.sessions.length >= 2" class="btn-secondary" @click="compare(child.id)">
+          <button
+            v-if="family.completedSessionsOf(child.id).length >= 2"
+            class="btn-secondary"
+            @click="compare(child.id)"
+          >
             Comparer deux passages
           </button>
         </div>

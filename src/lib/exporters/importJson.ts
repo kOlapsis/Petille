@@ -50,11 +50,27 @@ function isFamilyShape(value: unknown): value is Family {
   );
 }
 
-/** Migrations versionnées : à étoffer dès qu'un v2 apparaît. */
+/** v1 → v2 : ajout de `completed_at`. Sessions existantes = finalisées à leur date. */
+function migrateV1toV2(family: Family): Family {
+  return {
+    ...family,
+    schema_version: 2,
+    children: family.children.map((child) => ({
+      ...child,
+      sessions: child.sessions.map((s) => ({
+        ...s,
+        completed_at: s.completed_at ?? s.date,
+      })),
+    })),
+  } as Family;
+}
+
+/** Migrations versionnées : une branche par bump. */
 function migrate(family: Family): Family {
-  const current = family;
-  // Slot pour migrations futures :
-  // if (current.schema_version === 1) { current = migrateV1toV2(current); }
+  let current = family;
+  if (current.schema_version === 1) {
+    current = migrateV1toV2(current);
+  }
   if (current.schema_version !== SCHEMA_VERSION) {
     throw new InvalidFamilyJsonError(
       `Version de schéma non supportée : ${current.schema_version}`

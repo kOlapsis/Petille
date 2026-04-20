@@ -24,13 +24,16 @@ onMounted(async () => {
 });
 
 const selectedChild = computed<Child | null>(() => family.childById(selectedChildId.value));
+const completedSessions = computed<Session[]>(
+  () => selectedChild.value?.sessions.filter((s) => s.completed_at !== null) ?? []
+);
 const selectedSession = computed<Session | null>(
-  () => selectedChild.value?.sessions.find((s) => s.id === selectedSessionId.value) ?? null
+  () => completedSessions.value.find((s) => s.id === selectedSessionId.value) ?? null
 );
 
 function syncSession(): void {
-  const child = selectedChild.value;
-  selectedSessionId.value = child?.sessions[child.sessions.length - 1]?.id ?? '';
+  const sessions = completedSessions.value;
+  selectedSessionId.value = sessions[sessions.length - 1]?.id ?? '';
 }
 
 function setStatus(kind: 'ok' | 'err', message: string): void {
@@ -179,11 +182,7 @@ function downloadIcs(): void {
             v-model="selectedSessionId"
             class="mt-1 w-full rounded-petal border border-brand-200 px-3 py-2"
           >
-            <option
-              v-for="s in selectedChild?.sessions ?? []"
-              :key="s.id"
-              :value="s.id"
-            >
+            <option v-for="s in completedSessions" :key="s.id" :value="s.id">
               {{ s.date.slice(0, 10) }} — {{ s.age_at_session }} ans
             </option>
           </select>

@@ -5,7 +5,7 @@
  * et l'ajout d'une migration dans `importJson.ts`.
  */
 
-export const SCHEMA_VERSION = 1 as const;
+export const SCHEMA_VERSION = 2 as const;
 export type SchemaVersion = typeof SCHEMA_VERSION;
 
 export type QuestionnaireVersion = '6-8-v1' | '9-11-v1';
@@ -55,12 +55,37 @@ export interface ProfileSummary {
 
 export interface Session {
   id: string;
-  date: string; // ISO 8601
+  date: string; // ISO 8601 — date de démarrage
+  /** Date de finalisation (ISO 8601) ou null tant que c'est un brouillon. */
+  completed_at: string | null;
   age_at_session: number;
   questionnaire_version: QuestionnaireVersion;
   duration_seconds: number;
   answers: SessionAnswers;
   profile_summary: ProfileSummary;
+}
+
+export function isDraftSession(s: Session): boolean {
+  return s.completed_at === null;
+}
+
+/**
+ * Migre un carnet lu depuis IndexedDB vers la version courante.
+ * Les imports JSON passent par `importJson.ts` qui a son propre pipeline (déchiffrement, validation) ;
+ * ici c'est le pendant pour la base locale, qui peut contenir un v1 après mise à jour de l'app.
+ */
+export function migrateFamilyInPlace(family: Family): Family {
+  if ((family.schema_version as number) < 2) {
+    for (const child of family.children) {
+      for (const s of child.sessions) {
+        if (s.completed_at === undefined || s.completed_at === null) {
+          s.completed_at = s.date;
+        }
+      }
+    }
+    family.schema_version = SCHEMA_VERSION;
+  }
+  return family;
 }
 
 export interface Child {

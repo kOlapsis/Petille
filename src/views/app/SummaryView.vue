@@ -11,7 +11,14 @@ const family = useFamilyStore();
 
 onMounted(async () => {
   await family.hydrate();
-  if (!family.family) void router.replace('/app');
+  if (!family.family) {
+    void router.replace('/app');
+    return;
+  }
+  // Si on est tombé sur un brouillon (lien direct), on renvoie sur la saisie.
+  if (session.value && session.value.completed_at === null) {
+    void router.replace(`/app/enfant/${String(route.params.childId)}/session`);
+  }
 });
 
 const child = computed(() => family.childById(String(route.params.childId)));

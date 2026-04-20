@@ -37,7 +37,9 @@ function pickDefaults(): void {
 }
 
 const sortedSessions = computed(() =>
-  [...(child.value?.sessions ?? [])].sort((a, b) => a.date.localeCompare(b.date))
+  [...(child.value?.sessions ?? [])]
+    .filter((s) => s.completed_at !== null)
+    .sort((a, b) => a.date.localeCompare(b.date))
 );
 
 const earlier = computed(() => sortedSessions.value.find((s) => s.id === earlierId.value));
