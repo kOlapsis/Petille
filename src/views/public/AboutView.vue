@@ -58,8 +58,8 @@ const jsonLd = {
       Ce qui me porte : les projets à impact — ceux qui changent quelque chose, pour quelqu'un.
     </p>
     <p>
-      Je défends une approche pragmatique de la tech : souveraineté numérique, self-hosting, code
-      ouvert.
+      Je défends une approche pragmatique de la tech : souveraineté numérique, code ouvert
+      (open-source), résilient et économe.
     </p>
     <p>
       <strong>Pourquoi ce projet ?</strong> J'ai deux filles de 6 et 8 ans. Comme beaucoup de
