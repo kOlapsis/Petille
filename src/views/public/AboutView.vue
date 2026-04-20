@@ -47,14 +47,26 @@ const jsonLd = {
 
     <h2>L'auteur</h2>
     <p>
-      <strong>Benjamin TOUCHARD</strong>, développeur et architecte freelance à Bordeaux. 25 ans
-      dans la tech — développeur, lead, architecte. Stack principale : Go, Vue 3, PostgreSQL,
-      Docker. J'interviens notamment comme CTO à temps partiel chez NéoDTX. J'ai aussi 16 ans
-      d'enseignement au CESI et chez Ynov derrière moi.
+      <strong>Benjamin TOUCHARD</strong>, CTO et développeur senior à Bordeaux.
+    </p>
+    <p>
+      J'accompagne les entreprises sur le lancement de leurs projets : architecture logicielle,
+      infrastructure, structuration technique. Mon rôle est souvent de poser les fondations du
+      produit en parallèle du recrutement et de la montée en puissance de l'équipe tech.
+    </p>
+    <p>
+      Ce qui me porte : les projets à impact — ceux qui changent quelque chose, pour quelqu'un.
     </p>
     <p>
       Je défends une approche pragmatique de la tech : souveraineté numérique, self-hosting, code
-      ouvert, zéro bullshit.
+      ouvert.
+    </p>
+    <p>
+      <strong>Pourquoi ce projet ?</strong> J'ai deux filles de 6 et 8 ans. Comme beaucoup de
+      parents, j'ai observé qu'elles connaissent cinq métiers et que les stéréotypes se fixent
+      vite. J'ai cherché un outil pour garder la fenêtre ouverte. Les solutions existantes
+      (Avenir(s), Wilbi, Hello Charly) sont solides mais démarrent au collège. Entre 6 et 11 ans,
+      il n'y a rien. Alors je l'ai construit.
     </p>
 
     <h2>Ce qui est garanti</h2>
