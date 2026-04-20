@@ -12,7 +12,7 @@ Sans compte, sans tracking, sans aucun métier suggéré.
 [![PWA](https://img.shields.io/badge/PWA-ready-5A0FC8.svg)]()
 [![No tracking](https://img.shields.io/badge/tracking-zéro-success.svg)]()
 
-[Démo](#) · [Documentation](#) · [Signaler un bug](../../issues) · [Proposer une idée](../../discussions)
+[Online version](https://petille.kolapsis.com) · [Documentation](#) · [Signaler un bug](../../issues) · [Proposer une idée](../../discussions)
 
 </div>
 
