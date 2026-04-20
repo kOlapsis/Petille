@@ -4,9 +4,22 @@
  */
 import type { Child, Session } from './schema';
 import { actionLabel, contextOptionLabel, magicDayFieldLabel, themeLabel } from './labels';
+import { displayThemes } from './profile';
 
 const MARGIN = 15;
 const LINE_HEIGHT = 7;
+
+/**
+ * jsPDF + Helvetica ne savent pas rendre les emojis (plan astral Unicode) ni
+ * certains symboles rares : on obtient alors des « Ø=Ü6 ». On nettoie donc
+ * avant toute écriture pour garder un PDF propre.
+ */
+function sanitizeForPdf(text: string): string {
+  return text
+    .replace(/[\p{Extended_Pictographic}\u{FE0F}\u{200D}]/gu, '')
+    .replace(/[ \t]{2,}/g, ' ')
+    .trim();
+}
 
 interface PdfContext {
   doc: import('jspdf').jsPDF;
@@ -35,7 +48,7 @@ function writeWrapped(ctx: PdfContext, text: string, options: {
   ctx.doc.setFontSize(size);
   ctx.doc.setTextColor(color[0], color[1], color[2]);
   const maxWidth = ctx.pageWidth - MARGIN * 2;
-  const lines = ctx.doc.splitTextToSize(text, maxWidth) as string[];
+  const lines = ctx.doc.splitTextToSize(sanitizeForPdf(text), maxWidth) as string[];
   for (const line of lines) {
     ensureSpace(ctx, LINE_HEIGHT);
     ctx.doc.text(line, MARGIN, ctx.y);
@@ -69,11 +82,12 @@ function renderCover(ctx: PdfContext, child: Child, session: Session): void {
 }
 
 function renderThemes(ctx: PdfContext, session: Session): void {
-  if (session.profile_summary.top_themes.length === 0) return;
+  const themes = displayThemes(session.answers.themes, session.questionnaire_version);
+  if (themes.length === 0) return;
   heading(ctx, 'Tes univers du moment');
-  for (const key of session.profile_summary.top_themes) {
-    const { label, emoji } = themeLabel(session.questionnaire_version, key);
-    writeWrapped(ctx, `• ${emoji ? emoji + ' ' : ''}${label}`);
+  for (const key of themes) {
+    const { label } = themeLabel(session.questionnaire_version, key);
+    writeWrapped(ctx, `• ${label}`);
   }
   ctx.y += 4;
 }
@@ -93,8 +107,8 @@ function renderContext(ctx: PdfContext, session: Session): void {
   if (!entries.length) return;
   heading(ctx, 'Tu es bien quand…');
   for (const [qKey, optKey] of entries) {
-    const { label, emoji } = contextOptionLabel(session.questionnaire_version, qKey, optKey);
-    writeWrapped(ctx, `• ${emoji ? emoji + ' ' : ''}${label}`);
+    const { label } = contextOptionLabel(session.questionnaire_version, qKey, optKey);
+    writeWrapped(ctx, `• ${label}`);
   }
   ctx.y += 4;
 }
