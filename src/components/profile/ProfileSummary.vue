@@ -2,6 +2,7 @@
 import { computed } from 'vue';
 import type { Session } from '@/lib/schema';
 import { actionLabel, contextOptionLabel, magicDayFieldLabel, themeLabel } from '@/lib/labels';
+import { displayThemes } from '@/lib/profile';
 
 interface Props {
   session: Session;
@@ -10,7 +11,7 @@ interface Props {
 const props = defineProps<Props>();
 
 const themes = computed(() =>
-  props.session.profile_summary.top_themes.map((k) =>
+  displayThemes(props.session.answers.themes, props.session.questionnaire_version).map((k) =>
     themeLabel(props.session.questionnaire_version, k)
   )
 );
