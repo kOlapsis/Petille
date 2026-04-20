@@ -21,7 +21,7 @@ export interface ExportResult {
 export function buildFilename(family: Family, encrypted = false): string {
   const date = family.last_updated.slice(0, 10);
   const suffix = encrypted ? '.enc.json' : '.json';
-  return `petille-${family.family_id.slice(0, 8)}-${date}${suffix}`;
+  return `petille-carnet-${date}${suffix}`;
 }
 
 export function serializeFamily(family: Family, pretty = true): string {
