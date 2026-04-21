@@ -32,16 +32,46 @@ onMounted(async () => {
         <p class="tagline">Ce qui <em>fait briller</em> votre enfant.</p>
       </header>
 
-      <p class="lede">
-        Un carnet d'appétences à remplir une fois par an, pour aider votre enfant à mieux
-        se connaître — <strong>sans jamais lui souffler de métier</strong>.
-      </p>
+      <section class="how">
+        <h2 class="how-title">Comment ça se passe&nbsp;?</h2>
+        <ol class="steps">
+          <li class="step">
+            <span class="step-icon" aria-hidden="true">🌱</span>
+            <div>
+              <h3>Une fois par an</h3>
+              <p>
+                Votre enfant répond à quelques questions adaptées à son âge
+                (6-8 ou 9-11 ans). 20 à 30 minutes, tranquillement.
+              </p>
+            </div>
+          </li>
+          <li class="step">
+            <span class="step-icon" aria-hidden="true">📓</span>
+            <div>
+              <h3>Un portrait à cet instant</h3>
+              <p>
+                Pas de métier suggéré. Juste un profil d'appétences&nbsp;:
+                ce qu'il aime, les univers qui l'attirent, ses contextes.
+              </p>
+            </div>
+          </li>
+          <li class="step">
+            <span class="step-icon" aria-hidden="true">🪞</span>
+            <div>
+              <h3>On compare l'année suivante</h3>
+              <p>
+                Ce qui revient dessine quelque chose de stable. Ce qui change
+                est normal&nbsp;: les enfants grandissent.
+              </p>
+            </div>
+          </li>
+        </ol>
+      </section>
 
-      <ul class="promises">
-        <li>Aucun compte, aucune donnée ne sort de votre appareil.</li>
-        <li>Gratuit, libre (AGPL v3), sans pub ni traceur.</li>
-        <li>Aucun métier n'est jamais suggéré à votre enfant.</li>
-      </ul>
+      <aside class="pledge">
+        Aucun métier n'est jamais suggéré à votre enfant. L'outil s'arrête au
+        portrait. Le reste, c'est à vous et à votre enfant d'en parler, à votre rythme.
+      </aside>
 
       <section class="cta">
         <div class="cta-text">
@@ -160,51 +190,62 @@ html.flyer-root #main {
   text-underline-offset: 2px;
 }
 
-.lede {
-  margin: 1mm 0 0;
-  text-align: center;
-  font-size: 8.5pt;
-  line-height: 1.35;
-  color: #1f2937;
+.how {
+  margin-top: 0.5mm;
 }
-
-.promises {
+.how-title {
+  margin: 0 0 1.5mm;
+  font-size: 9pt;
+  font-weight: 700;
+  color: #0f172a;
+}
+.steps {
   list-style: none;
-  margin: 1mm 0 0;
-  padding: 3mm 3.5mm;
-  background: #fff3e6;
-  border-radius: 6px;
+  margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
   gap: 1.5mm;
 }
-.promises li {
-  position: relative;
-  padding-left: 5mm;
-  font-size: 8pt;
+.step {
+  display: grid;
+  grid-template-columns: 7mm 1fr;
+  gap: 2mm;
+  align-items: start;
+  padding: 2mm 2.5mm;
+  background: #fff;
+  border: 1px solid #ffedd5;
+  border-radius: 6px;
+}
+.step-icon {
+  font-size: 12pt;
+  line-height: 1;
+  text-align: center;
+  padding-top: 0.3mm;
+}
+.step h3 {
+  margin: 0 0 0.5mm;
+  font-size: 7.8pt;
+  font-weight: 700;
+  color: #0f172a;
+}
+.step p {
+  margin: 0;
+  font-size: 6.8pt;
   line-height: 1.3;
   color: #1f2937;
 }
-.promises li::before {
-  content: '';
-  position: absolute;
-  left: 0.5mm;
-  top: 1mm;
-  width: 2.8mm;
-  height: 2.8mm;
-  border-radius: 50%;
-  background: #ea580c;
-}
-.promises li::after {
-  content: '';
-  position: absolute;
-  left: 1.1mm;
-  top: 1.9mm;
-  width: 1.6mm;
-  height: 0.8mm;
-  border-left: 1px solid #fff;
-  border-bottom: 1px solid #fff;
-  transform: rotate(-45deg);
+
+.pledge {
+  margin-top: 2mm;
+  padding: 2mm 2.5mm;
+  background: #fff3e6;
+  border-left: 2px solid #ea580c;
+  border-radius: 4px;
+  font-size: 7pt;
+  font-style: italic;
+  line-height: 1.3;
+  color: #1f2937;
 }
 
 .cta {
