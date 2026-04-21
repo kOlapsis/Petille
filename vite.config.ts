@@ -78,7 +78,11 @@ export default defineConfig({
       const blogRoutes = blogPosts.map((p) => `/blog/${p.slug}`);
       return [
         ...paths.filter(
-          (p) => !p.startsWith('/app') && !p.includes(':') && !p.includes('pathMatch')
+          (p) =>
+            !p.startsWith('/app') &&
+            !p.startsWith('/flyer') &&
+            !p.includes(':') &&
+            !p.includes('pathMatch')
         ),
         ...blogRoutes,
       ];
