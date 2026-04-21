@@ -67,6 +67,11 @@ export const routes: RouteRecordRaw[] = [
     meta: { title: 'Flyer', ssg: false },
   },
   {
+    path: '/flyer/court',
+    component: () => import('@/views/flyer/FlyerShortView.vue'),
+    meta: { title: 'Flyer court', ssg: false },
+  },
+  {
     path: '/:pathMatch(.*)*',
     component: () => import('@/views/NotFoundView.vue'),
     meta: { title: 'Page introuvable' },
